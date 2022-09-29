@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.login_main')
 
 @section('container')
     <div class="row d-flex justify-content-center">

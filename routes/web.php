@@ -30,8 +30,6 @@ Route::resource('/rak', RakController::class);
 
 Route::resource('/user', UserController::class);
 
-
-
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 
 Route::post('/login', [AuthController::class, 'authenticate']);
