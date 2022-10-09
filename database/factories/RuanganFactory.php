@@ -14,7 +14,7 @@ class RuanganFactory extends Factory
     public function definition()
     {
         return [
-            'ruangan' => $this->faker->city(),
+            'name' => $this->faker->city(),
         ];
     }
 }

@@ -20,21 +20,54 @@
                         </div>
                         <div class="card-body">
                             <form action="/arsip" method="POST" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                    </div>
+                                @csrf
+                                <div class="form-group">
+                                    <label for="nama_file">Nama File</label>
+                                    <input type="text" class="form-control @error('nama_file') is-invalid  @enderror"
+                                        name="nama_file" id="nama_file" value="{{ old('nama_file') }}">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                <div class="form-group">
+                                    <label for="kode_klasifikasi">Kode Klasifikasi</label>
+                                    <input type="text"
+                                        class="form-control @error('kode_klasifikasi') is-invalid  @enderror"
+                                        name="kode_klasifikasi" id="kode_klasifikasi" value="{{ old('nama_file') }}">
                                 </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <div class="form-group">
+                                    <label for="sumber_arsip">Sumber Arsip</label>
+                                    <input type="text" class="form-control @error('sumber_arsip') is-invalid  @enderror"
+                                        name="sumber_arsip" id="sumber_arsip" value="{{ old('sumber_arsip') }}">
                                 </div>
+                                <div class="form-group">
+                                    <label for="proses">Proses</label>
+                                    <input type="text" class="form-control @error('proses') is-invalid  @enderror"
+                                        name="proses" id="proses" value="{{ old('proses') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ruangan</label>
+                                    <select class="form-control select2" name="ruangan_id" id="select_ruangan">
+                                        <option value="">Pilih Ruangan</option>
+                                        @forelse ($ruangan as $ruang)
+                                            <option value="{{ $ruang->id }}">{{ $ruang->name }}</option>
+                                        @empty
+                                            <option value="">Tidak Ada Data Ruangan</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rak</label>
+                                    <select class="form-control select2" name="rak_id" id="select_rak">
+                                        <option>Pilih Rak</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="keterangan">Keterangan</label>
+                                    <input type="text" class="form-control @error('keterangan') is-invalid  @enderror"
+                                        name="keterangan" id="keterangan" value="{{ old('keterangan') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>File</label>
+                                    <input type="file" class="form-control" name="file">
+                                  </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>

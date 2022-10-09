@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Arsip::factory(33)->create();
-        Ruangan::factory(5)->create();
-        Rak::factory(10)->create();
+        
+        Ruangan::factory(2)->create();
+        Rak::factory(4)->create();
+        Arsip::factory(10)->create();
 
         User::create([
             'name' => 'admin',

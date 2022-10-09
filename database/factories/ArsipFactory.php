@@ -14,14 +14,12 @@ class ArsipFactory extends Factory
     public function definition()
     {
         return [
-            'tanggal_masuk' => $this->faker->dateTimeBetween('-5 years','now'),
+            'nama_file' => $this->faker->sentence(),
             'sumber_arsip' => $this->faker->city(),
             'kode_klasifikasi' => $this->faker->postcode(),
-            'uraian_informasi' => $this->faker->sentence(),
-            'kurun_waktu' => $this->faker->dateTimeBetween("-4 years", "+4 years"),
-            'jumlah' => mt_rand(1,3),
             'proses' => mt_rand(1,2) == 1? "Musnah":"Proses",
-            'lokasi' => $this->faker->city(),
+            'ruangan_id' => mt_rand(1,2),
+            'rak_id' => mt_rand(1,4),
             'keterangan' => $this->faker->paragraph(),
             'file' => $this->faker->city().".txt",
         ];

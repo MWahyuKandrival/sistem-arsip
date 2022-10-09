@@ -9,4 +9,16 @@ class Rak extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    protected $with = ['ruangan'];
+
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class);
+    }
+
+    public function arsip()
+    {
+        return $this->hasMany(Arsip::class);
+    }
 }

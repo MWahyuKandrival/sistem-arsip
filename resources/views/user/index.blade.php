@@ -15,7 +15,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex">
-                            <h4><a href="/User/create" class="btn btn-primary">Tambahkan user</a></h4>
+                            <h4><a href="/user/create" class="btn btn-primary">Tambahkan user</a></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -32,8 +32,8 @@
                                         @forelse ($users as $a)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td> {{ auth()->user()->name }}</td>
-                                                <td> {{ auth()->user()->username }}</td>
+                                                <td> {{ $a->name }}</td>
+                                                <td> {{ $a->username }}</td>
                                                 <td>
                                                     <a href="/user/{{ $a->id }}" class="badge bg-info text-white"><i
                                                             class="fa-sharp fa-solid fa-eye"></i>
@@ -46,9 +46,9 @@
                                                         id="deleteForm_{{ $loop->iteration }}">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger text-white border-0 btn-submit"
+                                                        <button class="badge bg-danger text-white border-0 btn-user"
                                                             data-loop="{{ $loop->iteration }}"
-                                                            data-nama_file="{{ $a->file }}">
+                                                            data-nama="{{ $a->name }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </form>

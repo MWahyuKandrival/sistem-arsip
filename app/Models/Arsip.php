@@ -10,6 +10,8 @@ class Arsip extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    protected $with = ['rak', 'ruangan'];
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
@@ -24,5 +26,15 @@ class Arsip extends Model
                 ->orWhere('tanggal_masuk', 'like', '%' . $search . '%')
                 ;
         });
+    }
+
+    public function rak()
+    {
+        return $this->belongsTo(Rak::class);
+    }
+
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class);
     }
 }

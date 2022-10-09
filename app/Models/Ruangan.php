@@ -10,4 +10,12 @@ class Ruangan extends Model
     use HasFactory;
     protected $guarded = ['id'];
     
+    public function rak()
+    {
+        return $this->hasMany(Rak::class);
+    }
+    public function arsip()
+    {
+        return $this->hasMany(Arsip::class);
+    }
 }

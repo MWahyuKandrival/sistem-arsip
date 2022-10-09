@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Arsip;
+use App\Models\Rak;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 
 class ArsipController extends Controller
@@ -15,15 +17,18 @@ class ArsipController extends Controller
     public function index()
     {
         return view('arsip.index', [
-            'arsip' => Arsip::latest()->filter(request(['search']))->paginate(10)->withQueryString()
+            'arsip' => Arsip::latest()->get()
         ]);
     }
 
-    public function datatable()
+    public function getRak($id_ruangan = 0)
     {
-        return view('arsip.datatable', [
-            'arsip' => Arsip::latest()->get()
-        ]);
+        $rak['data'] = Rak::orderby('name', 'asc')
+                             ->select('id', 'name')
+                             ->where('ruangan_id', $id_ruangan)
+                             ->get();
+        
+        return response()->json($rak);
     }
 
     /**
@@ -33,7 +38,9 @@ class ArsipController extends Controller
      */
     public function create()
     {
-        return view('arsip.create');
+        return view('arsip.create', [
+            'ruangan' => Ruangan::all()
+        ]);
     }
 
     /**

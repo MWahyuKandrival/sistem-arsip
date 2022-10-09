@@ -19,19 +19,23 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" id="table-1">
+                                <table class="table table-striped" id="table-2">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Ruangan</th>
+                                            <th>Jumlah Rak</th>
+                                            <th>Jumlah Arsip</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($ruangan as $a)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td> {{ $a->ruangan }}</td>
+                                                <td> {{ $loop->iteration }} </td>
+                                                <td> {{ $a->name }} </td>
+                                                <td> {{ $a->rak->count() }} </td>
+                                                <td> {{ $a->arsip->count() }} </td>
                                                 <td>
                                                     <a href="/ruangan/{{ $a->id }}" class="badge bg-info text-white"><i
                                                             class="fa-sharp fa-solid fa-eye"></i>
@@ -44,9 +48,9 @@
                                                         id="deleteForm_{{ $loop->iteration }}">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger text-white border-0 btn-submit"
+                                                        <button class="badge bg-danger text-white border-0 btn-ruangan"
                                                             data-loop="{{ $loop->iteration }}"
-                                                            data-nama_file="{{ $a->file }}">
+                                                            data-nama_ruangan="{{ $a->name }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </form>

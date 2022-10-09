@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/modules/datatables/datatables.min.css">
     <link rel="stylesheet" href="/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/modules/select2/dist/css/select2.min.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -67,22 +68,28 @@
     <script src="/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
     <script src="/assets/modules/sweetalert/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+
 
     <!-- Page Specific JS File -->
     <script src="/assets/js/page/modules-datatables.js"></script>
     <script src="/assets/js/page/modules-sweetalert.js"></script>
+    <script src="/assets/js/page/forms-advanced-forms.js"></script>
+    <script src="/assets/modules/select2/dist/js/select2.full.min.js"></script>
+    <script src="/assets/js/page/forms-advanced-forms.js"></script>
 
     <!-- Template JS File -->
     <script src="/assets/js/scripts.js"></script>
     <script src="/assets/js/custom.js"></script>
 
     <script>
-        $(document).on('click', '.btn-submit', function(e) {
+        //Delete button Arsip
+        $(document).on('click', '.btn-arsip', function(e) {
             e.preventDefault();
             let loop = $(this).data('loop');
             let nama_file = $(this).data('nama_file');
             swal({
-                    title: 'Hapus '+ nama_file + '?',
+                    title: 'Hapus ' + nama_file + '?',
                     text: 'Sekali dihapus, kamu tidak akan bisa mengembalikan file ini kembali!',
                     icon: 'warning',
                     buttons: true,
@@ -92,12 +99,122 @@
                     if (willDelete) {
                         swal('Berhasil menghapus file', {
                             icon: 'success',
+                        }).then((showNotif) => {
+                            $(`#deleteForm_${loop}`).submit();
                         });
-                        $(`#deleteForm_${loop}`).submit();
                     } else {
                         swal('File tidak jadi dihapus!');
                     }
                 });
+        });
+
+        //Delete button Ruangan
+        $(document).on('click', '.btn-ruangan', function(e) {
+            e.preventDefault();
+            let loop = $(this).data('loop');
+            let nama_ruangan = $(this).data('nama_ruangan');
+            swal({
+                    title: 'Hapus ' + nama_ruangan + '?',
+                    text: 'Sekali dihapus, kamu tidak akan bisa mengembalikan Ruangan ini kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal('Berhasil menghapus Ruangan', {
+                            icon: 'success',
+                        }).then((showNotif) => {
+                            $(`#deleteForm_${loop}`).submit();
+                        });
+                    } else {
+                        swal('Ruangan tidak jadi dihapus!');
+                    }
+                });
+        });
+
+        //Delete button Rak
+        $(document).on('click', '.btn-rak', function(e) {
+            e.preventDefault();
+            let loop = $(this).data('loop');
+            let nama_rak = $(this).data('nama_rak');
+            swal({
+                    title: 'Hapus ' + nama_rak + '?',
+                    text: 'Sekali dihapus, kamu tidak akan bisa mengembalikan Rak ini kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal('Berhasil menghapus Rak', {
+                            icon: 'success',
+                        }).then((showNotif) => {
+                            $(`#deleteForm_${loop}`).submit();
+                        });
+                    } else {
+                        swal('Rak tidak jadi dihapus!');
+                    }
+                });
+        });
+
+        //Delete button User
+        $(document).on('click', '.btn-user', function(e) {
+            e.preventDefault();
+            let loop = $(this).data('loop');
+            let nama = $(this).data('nama');
+            swal({
+                    title: 'Hapus ' + nama + '?',
+                    text: 'Sekali dihapus, kamu tidak akan bisa mengembalikan User ini kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal('Berhasil menghapus User', {
+                            icon: 'success',
+                        }).then((showNotif) => {
+                            $(`#deleteForm_${loop}`).submit();
+                        });
+                    } else {
+                        swal('User tidak jadi dihapus!');
+                    }
+                });
+        });
+
+        // Ruangan Change
+        $('#select_ruangan').change(function() {
+            var id = $(this).val();
+
+            // Hapus dropdown rak
+            $('#select_rak').find('option').not(':first').remove();
+
+            //AJAX
+            $.ajax({
+                url: '/getRak/' + id,
+                type: 'get',
+                dataType: 'json',
+                success: function(response) {
+                    var len = 0;
+                    if (response['data'] != null) {
+                        len = response['data'].length;
+                    }
+
+                    if (len > 0) {
+                        // Read data and create <option >
+                        for (var i = 0; i < len; i++) {
+
+                            var id = response['data'][i].id;
+                            var name = response['data'][i].name;
+
+                            var option = "<option value='" + id + "'>" + name + "</option>";
+
+                            $("#select_rak").append(option);
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>

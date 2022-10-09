@@ -14,7 +14,8 @@ class RakFactory extends Factory
     public function definition()
     {
         return [
-            'rak' => mt_rand(1,10),
+            'name' => mt_rand(1,10),
+            'ruangan_id' => mt_rand(1,2),
         ];
     }
 }

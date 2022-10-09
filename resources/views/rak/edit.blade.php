@@ -7,7 +7,7 @@
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="/rak">Rak</a></div>
-                <div class="breadcrumb-item">Tambah Rak</div>
+                <div class="breadcrumb-item">Edit Rak</div>
             </div>
         </div>
 
@@ -16,21 +16,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Form Tambah Rak</h4>
+                            <h4>Form Edit Rak</h4>
                         </div>
                         <div class="card-body">
-                            <form action="/rak" method="POST">
+                            <form action="/rak/{{ $rak->id }}" method="POST">
+                                @method('put')
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Nama Rak</label>
                                     <input type="text" class="form-control @error('name') is-invalid  @enderror"
-                                        name="name" id="name" value="{{ old('name') }}">
+                                        name="name" id="name" value="{{ $rak->name }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Ruangan</label>
                                     <select class="form-control select2" name="ruangan_id">
                                         @forelse ($ruangan as $ruang)
-                                            <option value="{{ $ruang->id }}" @if ($ruangan_id == $ruang->id)
+                                            <option value="{{ $ruang->id }}" @if ($rak->ruangan->id == $ruang->id)
                                                 selected
                                             @endif>{{ $ruang->name }}</option>
                                         @empty

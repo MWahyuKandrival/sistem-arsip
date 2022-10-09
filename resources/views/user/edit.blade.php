@@ -7,7 +7,7 @@
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="/user">User</a></div>
-                <div class="breadcrumb-item">Tambah User</div>
+                <div class="breadcrumb-item">Edit User</div>
             </div>
         </div>
 
@@ -16,16 +16,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Form Tambah User</h4>
+                            <h4>Form Edit User</h4>
                         </div>
                         <div class="card-body">
-                            <form action="/user" method="POST">
+                            <form action="/user/{{ $user->id }}" method="POST">
+                                @method('put')
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Nama User</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        id="name" name="name" placeholder="Name" value="{{ old('name') }}"
-                                        required>
+                                    <input type="text"
+                                        class="form-control @error('name') is-invalid @enderror" id="name"
+                                        name="name" placeholder="Name" value="{{ $user->name }}" required>
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -35,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        id="username" name="username" placeholder="Username" value="{{ old('username') }}"
+                                        id="username" name="username" placeholder="Username" value="{{ $user->username }}"
                                         required>
                                     @error('username')
                                         <div class="invalid-feedback">
@@ -47,7 +48,7 @@
                                     <label for="name">Email Address</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                                         id="email" name="email" placeholder="name@example.com"
-                                        value="{{ old('email') }}" required>
+                                        value="{{ $user->email }}" required>
                                     @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -56,24 +57,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        data-toggle="password" id="password" name="password" placeholder="Password"
-                                        required>
+                                    <input type="password"
+                                        class="form-control @error('password') is-invalid @enderror"
+                                        data-toggle="password" value="{{ $user->password }}"
+                                        id="password" name="password" placeholder="Password" required>
                                     @error('password')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="password_confirmation-id">Repeat password</label>
-                                    <input type="password" class="form-control" id="password_confirmation-id"
-                                        name="password_confirmation" placeholder="Repeat your password.." required
-                                        autocomplete="new-password-confirm" data-toggle="password">
-                                    @error('password_confirmation')
-                                        <small class="is-invalid text-left alert alert-danger bg-light p-1">
-                                            {{ $message }}
-                                        </small>
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>

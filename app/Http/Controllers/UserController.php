@@ -26,7 +26,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create', [
+
+        ]);
     }
 
     /**
@@ -37,7 +39,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|min:5|max:255',
+            'username' => 'required|min:5|max:255|unique:users',
+            'email' => 'required|min:5|max:255|email:dns|unique:users',
+            'password' => 'required|min:5|max:255|confirmed',
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        User::create($validatedData);
+
+        return redirect('/user')->with('success', 'Pendaftaran Akun berhasil');
     }
 
     /**
@@ -59,7 +72,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user.edit', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -71,7 +86,18 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'username' => 'required|string|regex:/\w*/|max:255|unique:users,username,'.$user->id,
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password' => 'required|min:5|max:255',
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+        
+        User::where('id', $user->id)->update($validatedData);
+
+        return redirect('/user')->with('success', 'Perubahan Akun berhasil');
     }
 
     /**
@@ -82,6 +108,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        
+        return redirect('/user')->with('success', 'User has been deleted');
     }
 }

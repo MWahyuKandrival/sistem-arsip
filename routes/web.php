@@ -18,13 +18,15 @@ use App\Http\Controllers\RuanganController;
 |
 */
 
-Route::get('/arsip/datatable', [ArsipController::class, 'datatable']);
-
-Route::get('/', [ArsipController::class, 'datatable']);
+Route::get('/', [ArsipController::class, 'index'])->middleware('auth');
 
 Route::resource('/arsip', ArsipController::class);
 
+Route::get('/getRak/{id}', [ArsipController::class, 'getRak']);
+
 Route::resource('/ruangan', RuanganController::class);
+
+Route::get('/rak/create/{id}', [RakController::class, 'create']);
 
 Route::resource('/rak', RakController::class);
 
