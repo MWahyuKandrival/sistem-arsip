@@ -21,7 +21,7 @@ class ArsipFactory extends Factory
             'ruangan_id' => mt_rand(1,2),
             'rak_id' => mt_rand(1,4),
             'keterangan' => $this->faker->paragraph(),
-            'file' => $this->faker->city().".txt",
+            // 'file' => $this->faker->city().".txt",
         ];
     }
 }

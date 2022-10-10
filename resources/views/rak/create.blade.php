@@ -25,18 +25,28 @@
                                     <label for="name">Nama Rak</label>
                                     <input type="text" class="form-control @error('name') is-invalid  @enderror"
                                         name="name" id="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Ruangan</label>
                                     <select class="form-control select2" name="ruangan_id">
                                         @forelse ($ruangan as $ruang)
-                                            <option value="{{ $ruang->id }}" @if ($ruangan_id == $ruang->id)
-                                                selected
-                                            @endif>{{ $ruang->name }}</option>
+                                            <option value="{{ $ruang->id }}"
+                                                @if ($ruangan_id == $ruang->id) selected @endif>{{ $ruang->name }}
+                                            </option>
                                         @empty
                                             <option value="">Tidak Ada Data Ruangan</option>
                                         @endforelse
                                     </select>
+                                    @error('ruangan_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

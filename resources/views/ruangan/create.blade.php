@@ -25,6 +25,11 @@
                                     <label for="name">Nama Ruangan</label>
                                     <input type="text" class="form-control @error('name') is-invalid  @enderror"
                                         name="name" id="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

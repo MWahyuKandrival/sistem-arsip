@@ -14,6 +14,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('success'))
+                            <div class="row d-flex justify-content-center">
+                                <div class="alert alert-success col-lg-8" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            </div>
+                        @endif
                         <div class="card-header d-flex">
                             <h4><a href="/ruangan/create" class="btn btn-primary">Tambahkan Ruangan</a></h4>
                         </div>
@@ -37,7 +44,8 @@
                                                 <td> {{ $a->rak->count() }} </td>
                                                 <td> {{ $a->arsip->count() }} </td>
                                                 <td>
-                                                    <a href="/ruangan/{{ $a->id }}" class="badge bg-info text-white"><i
+                                                    <a href="/ruangan/{{ $a->id }}"
+                                                        class="badge bg-info text-white"><i
                                                             class="fa-sharp fa-solid fa-eye"></i>
                                                     </a>
                                                     <a href="/ruangan/{{ $a->id }}/edit"

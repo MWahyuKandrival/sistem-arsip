@@ -6,6 +6,7 @@ use App\Models\Arsip;
 use App\Models\Rak;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ArsipController extends Controller
 {
@@ -51,7 +52,34 @@ class ArsipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            "nama_file" => "required|max:255",
+            "kode_klasifikasi" => "required|max:255",
+            "sumber_arsip" => "required|max:255",
+            "proses" => "required",
+            "ruangan_id" => "required|exists:ruangans,id",
+            "rak_id" => "required|exists:raks,id",
+            "keterangan" => "required",
+            "file" => "mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp",
+        ]);
+
+        if($request->file('file')){
+            $uploadPath = public_path('arsip');
+
+            if(!File::isDirectory($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true, true);
+            }
+    
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $rename = 'file_' . date('YmdHis') . '.' . $extension;
+            $file->move($uploadPath, $rename);
+            $validatedData['file'] = $rename;
+        }
+
+        Arsip::create($validatedData);
+        
+        return redirect('/arsip')->with('success', 'Arsip has been created');
     }
 
     /**

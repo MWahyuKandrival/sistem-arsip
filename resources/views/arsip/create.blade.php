@@ -25,26 +25,46 @@
                                     <label for="nama_file">Nama File</label>
                                     <input type="text" class="form-control @error('nama_file') is-invalid  @enderror"
                                         name="nama_file" id="nama_file" value="{{ old('nama_file') }}">
+                                    @error('nama_file')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="kode_klasifikasi">Kode Klasifikasi</label>
                                     <input type="text"
                                         class="form-control @error('kode_klasifikasi') is-invalid  @enderror"
-                                        name="kode_klasifikasi" id="kode_klasifikasi" value="{{ old('nama_file') }}">
+                                        name="kode_klasifikasi" id="kode_klasifikasi" value="{{ old('kode_klasifikasi') }}">
+                                    @error('kode_klasifikasi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="sumber_arsip">Sumber Arsip</label>
                                     <input type="text" class="form-control @error('sumber_arsip') is-invalid  @enderror"
                                         name="sumber_arsip" id="sumber_arsip" value="{{ old('sumber_arsip') }}">
+                                    @error('sumber_arsip')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="proses">Proses</label>
                                     <input type="text" class="form-control @error('proses') is-invalid  @enderror"
                                         name="proses" id="proses" value="{{ old('proses') }}">
+                                    @error('proses')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Ruangan</label>
-                                    <select class="form-control select2" name="ruangan_id" id="select_ruangan">
+                                    <select class="form-control @error('proses') is-invalid  @enderror select2" name="ruangan_id" id="select_ruangan">
                                         <option value="">Pilih Ruangan</option>
                                         @forelse ($ruangan as $ruang)
                                             <option value="{{ $ruang->id }}">{{ $ruang->name }}</option>
@@ -52,22 +72,42 @@
                                             <option value="">Tidak Ada Data Ruangan</option>
                                         @endforelse
                                     </select>
+                                    @error('ruangan_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Rak</label>
                                     <select class="form-control select2" name="rak_id" id="select_rak">
                                         <option>Pilih Rak</option>
                                     </select>
+                                    @error('rak_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
                                     <input type="text" class="form-control @error('keterangan') is-invalid  @enderror"
                                         name="keterangan" id="keterangan" value="{{ old('keterangan') }}">
+                                    @error('keterangan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>File</label>
                                     <input type="file" class="form-control" name="file">
-                                  </div>
+                                    @error('file')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>

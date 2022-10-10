@@ -22,7 +22,7 @@ class CreateArsipsTable extends Migration
             $table->foreignId('ruangan_id');
             $table->foreignId('rak_id');
             $table->text('keterangan');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

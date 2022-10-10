@@ -14,6 +14,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('success'))
+                            <div class="row d-flex justify-content-center">
+                                <div class="alert alert-success col-lg-8" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            </div>
+                        @endif
                         <div class="card-header d-flex">
                             <h4><a href="/user/create" class="btn btn-primary">Tambahkan user</a></h4>
                         </div>
@@ -35,9 +42,9 @@
                                                 <td> {{ $a->name }}</td>
                                                 <td> {{ $a->username }}</td>
                                                 <td>
-                                                    <a href="/user/{{ $a->id }}" class="badge bg-info text-white"><i
+                                                    {{-- <a href="/user/{{ $a->id }}" class="badge bg-info text-white"><i
                                                             class="fa-sharp fa-solid fa-eye"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     <a href="/user/{{ $a->id }}/edit"
                                                         class="badge bg-warning text-white"><i
                                                             class="fa-solid fa-pen-to-square"></i>

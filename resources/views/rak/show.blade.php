@@ -15,6 +15,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('success'))
+                            <div class="row d-flex justify-content-center">
+                                <div class="alert alert-success col-lg-8" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            </div>
+                        @endif
                         <div class="card-header d-flex">
                             <h4><a href="/arsip/create" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
                         </div>

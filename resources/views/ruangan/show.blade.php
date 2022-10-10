@@ -15,6 +15,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('success'))
+                            <div class="row d-flex justify-content-center">
+                                <div class="alert alert-success col-lg-8" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            </div>
+                        @endif
                         <div class="card-header d-flex">
                             <h4><a href="/rak/create/{{ $ruangan->id }}" class="btn btn-primary btn-add-rak" data-id="{{ $ruangan->id }}">Tambahkan Rak</a></h4>
                         </div>

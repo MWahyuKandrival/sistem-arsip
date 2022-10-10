@@ -19,103 +19,14 @@
                             <h4>Detail Arsip</h4>
                         </div>
                         <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Nama File 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->file }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Kode Klasifikasi 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->kode_klasifikasi }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Sumber Arsip
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->sumber_arsip }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Uraian Informasi 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->uraian_informasi }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Jumlah 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->jumlah }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    proses 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->proses }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Lokasi 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->lokasi }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Keterangan 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ $arsip->keterangan }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Tanggal Masuk 
-                                </div>
-                                <div class="col-lg-1">
-                                    :
-                                </div>
-                                <div class="col-lg-7">
-                                    {{ \Carbon\Carbon::parse($arsip->created_at)->isoFormat('D MMMM Y') }}
+                            <div class="container">
+                                <div class="row d-flex justify-content-center ">
+                                    <div class="col-md-6">
+                                        <h5>{{ $arsip->nama_file }}</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Test
+                                    </div>
                                 </div>
                             </div>
                         </div>
