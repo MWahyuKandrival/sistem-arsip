@@ -44,6 +44,17 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="nip">Nip</label>
+                                    <input type="text" class="form-control @error('nip') is-invalid @enderror"
+                                        id="nip" name="nip" placeholder="Nip" value="{{ old('nip') }}"
+                                        required>
+                                    @error('nip')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="name">Email Address</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                                         id="email" name="email" placeholder="name@example.com"

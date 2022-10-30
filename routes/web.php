@@ -20,6 +20,8 @@ use App\Http\Controllers\RuanganController;
 
 Route::get('/', [ArsipController::class, 'index'])->middleware('auth');
 
+Route::get('/arsip/create/{ruangan_id}/{rak_id}', [ArsipController::class, 'create']);
+
 Route::resource('/arsip', ArsipController::class);
 
 Route::get('/getRak/{id}', [ArsipController::class, 'getRak']);

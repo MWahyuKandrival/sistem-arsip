@@ -37,9 +37,11 @@ class ArsipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($ruangan_id ="", $rak_id = "")
     {
         return view('arsip.create', [
+            'rak_id' => $rak_id,
+            'ruangan_id' => $ruangan_id,
             'ruangan' => Ruangan::all()
         ]);
     }
@@ -64,7 +66,7 @@ class ArsipController extends Controller
         ]);
 
         if($request->file('file')){
-            $uploadPath = public_path('arsip');
+            $uploadPath = public_path('file');
 
             if(!File::isDirectory($uploadPath)) {
                 File::makeDirectory($uploadPath, 0755, true, true);
@@ -105,7 +107,11 @@ class ArsipController extends Controller
      */
     public function edit(Arsip $arsip)
     {
-        //
+        return view('arsip/edit', [
+            'arsip'=> $arsip,
+            'ruangan' => Ruangan::all(),
+            'rak' => Rak::where("ruangan_id", $arsip->ruangan->id)->get(),
+        ]);
     }
 
     /**
@@ -117,7 +123,36 @@ class ArsipController extends Controller
      */
     public function update(Request $request, Arsip $arsip)
     {
-        //
+        $validatedData = $request->validate([
+            "nama_file" => "required|max:255",
+            "kode_klasifikasi" => "required|max:255",
+            "sumber_arsip" => "required|max:255",
+            "proses" => "required",
+            "ruangan_id" => "required|exists:ruangans,id",
+            "rak_id" => "required|exists:raks,id",
+            "keterangan" => "required",
+            "file" => "mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp",
+        ]);
+
+        if($request->file('file')){
+            $uploadPath = public_path('file');
+
+            if(!File::isDirectory($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true, true);
+            }
+            File::delete("file/".$arsip->file);
+    
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $rename = 'file_' . date('YmdHis') . '.' . $extension;
+            $file->move($uploadPath, $rename);
+            $validatedData['file'] = $rename;
+        }
+
+        Arsip::where('id', $arsip->id)
+        ->update($validatedData);
+        
+        return redirect('/rak/'.$arsip->rak->id)->with('success', 'Arsip has been updated');
     }
 
     /**

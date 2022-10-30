@@ -23,7 +23,7 @@
                             </div>
                         @endif
                         <div class="card-header d-flex">
-                            <h4><a href="/arsip/create" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
+                            <h4><a href="/arsip/create/{{ $rak->ruangan->id }}/{{ $rak->id }}" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

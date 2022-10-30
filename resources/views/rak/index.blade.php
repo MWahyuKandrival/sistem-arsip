@@ -38,7 +38,7 @@
                                         @forelse ($rak as $a)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td> {{ $a->rak }}</td>
+                                                <td> {{ $a->name }}</td>
                                                 <td>
                                                     <a href="/rak/{{ $a->id }}" class="badge bg-info text-white"><i
                                                             class="fa-sharp fa-solid fa-eye"></i>

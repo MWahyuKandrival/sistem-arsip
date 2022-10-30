@@ -31,7 +31,8 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <input type="hidden" name="ruangan_id" value="{{ $ruangan_id }}">
+                                {{-- <div class="form-group">
                                     <label>Ruangan</label>
                                     <select class="form-control select2" name="ruangan_id">
                                         @forelse ($ruangan as $ruang)
@@ -47,8 +48,9 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="/ruangan/{{ $ruangan_id }}" class="btn btn-warning">Back</a>
                             </form>
                         </div>
                     </div>

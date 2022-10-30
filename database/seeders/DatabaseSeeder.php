@@ -19,13 +19,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         
-        Ruangan::factory(2)->create();
-        Rak::factory(4)->create();
+        Ruangan::factory(3)->create();
+        Rak::factory(12)->create();
         Arsip::factory(10)->create();
 
         User::create([
             'name' => 'admin',
             'username' => 'admin',
+            'nip' => '12345',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('testes'),
         ]);

@@ -42,6 +42,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|min:5|max:255',
             'username' => 'required|min:5|max:255|unique:users',
+            'nip' => 'required|min:5|max:255|unique:users',
             'email' => 'required|min:5|max:255|email:dns|unique:users',
             'password' => 'required|min:5|max:255|confirmed',
         ]);
@@ -89,6 +90,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'username' => 'required|string|regex:/\w*/|max:255|unique:users,username,'.$user->id,
             'name' => 'required|string|max:255',
+            'nip' => 'required|min:5|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'password' => 'required|min:5|max:255',
         ]);

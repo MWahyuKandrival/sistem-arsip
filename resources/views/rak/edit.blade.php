@@ -50,6 +50,7 @@
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="/ruangan/{{ $rak->ruangan->id }}" class="btn btn-warning">Back</a>
                             </form>
                         </div>
                     </div>
