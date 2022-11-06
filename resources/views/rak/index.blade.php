@@ -31,6 +31,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Rak</th>
+                                            <th>Jumlah Arsip</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -39,6 +40,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td> {{ $a->name }}</td>
+                                                <td> {{ $a->arsip->count() }}</td>
                                                 <td>
                                                     <a href="/rak/{{ $a->id }}" class="badge bg-info text-white"><i
                                                             class="fa-sharp fa-solid fa-eye"></i>
@@ -51,9 +53,9 @@
                                                         id="deleteForm_{{ $loop->iteration }}">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger text-white border-0 btn-submit"
+                                                        <button class="badge bg-danger text-white border-0 btn-delete"
                                                             data-loop="{{ $loop->iteration }}"
-                                                            data-nama_file="{{ $a->file }}">
+                                                            data-name="{{ $a->name }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </form>

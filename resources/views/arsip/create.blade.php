@@ -42,16 +42,28 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="sumber_arsip">Sumber Arsip</label>
-                                    <input type="text" class="form-control @error('sumber_arsip') is-invalid  @enderror"
-                                        name="sumber_arsip" id="sumber_arsip" value="{{ old('sumber_arsip') }}">
-                                    @error('sumber_arsip')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                                {{-- Jika parameter 1 berisi dan parameter 2 kosong input sumber hidden --}}
+                                @if ($param1 != '' && $param2 == '') 
+                                    <input type="hidden" name="sumber_id" value="{{ $param1 }}">
+                                @else
+                                    <div class="form-group">
+                                        <label>Sumber</label>
+                                        <select class="form-control select2" name="sumber_id">
+                                            @forelse ($sumber as $s)
+                                                <option value="{{ $s->id }}">{{ $s->name }}
+                                                </option>
+                                            @empty
+                                                <option value="">Tidak Ada Data Sumber</option>
+                                            @endforelse
+                                        </select>
+                                        @error('sumber_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                @endif
+
                                 <div class="form-group">
                                     <label for="proses">Proses</label>
                                     <input type="text" class="form-control @error('proses') is-invalid  @enderror"
@@ -62,9 +74,9 @@
                                         </div>
                                     @enderror
                                 </div>
-                                @if ($rak_id != '')
-                                    <input type="hidden" name="ruangan_id" value="{{ $ruangan_id }}">
-                                    <input type="hidden" name="rak_id" value="{{ $rak_id }}">
+                                @if ($param2 != '')
+                                    <input type="hidden" name="ruangan_id" value="{{ $param1 }}">
+                                    <input type="hidden" name="rak_id" value="{{ $param2 }}">
                                 @else
                                     <div class="form-group">
                                         <label>Ruangan</label>
@@ -116,8 +128,8 @@
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                @if ($rak_id != '')
-                                    <a href="/rak/{{ $rak_id }}" class="btn btn-warning">Back</a>
+                                @if ($param2 != '')
+                                    <a href="/rak/{{ $param2 }}" class="btn btn-warning">Back</a>
                                 @else
                                     <a href="/" class="btn btn-warning">Back</a>
                                 @endif

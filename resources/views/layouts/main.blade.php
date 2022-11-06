@@ -83,6 +83,32 @@
     <script src="/assets/js/custom.js"></script>
 
     <script>
+
+        //Delete button 
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault();
+            let loop = $(this).data('loop');
+            let name = $(this).data('name');
+            swal({
+                    title: 'Hapus ' + name + '?',
+                    text: 'Sekali dihapus, kamu tidak akan bisa mengembalikan data ini kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal('Berhasil menghapus Data', {
+                            icon: 'success',
+                        }).then((showNotif) => {
+                            $(`#deleteForm_${loop}`).submit();
+                        });
+                    } else {
+                        swal('Data tidak jadi dihapus!');
+                    }
+                });
+        });
+
         //Delete button Arsip
         $(document).on('click', '.btn-arsip', function(e) {
             e.preventDefault();
@@ -105,6 +131,7 @@
                     } else {
                         swal('File tidak jadi dihapus!');
                     }
+                    
                 });
         });
 

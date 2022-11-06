@@ -46,7 +46,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td> {{ $a->nama_file }}</td>
                                                 <td> {{ $a->kode_klasifikasi }}</td>
-                                                <td> {{ $a->sumber_arsip }}</td>
+                                                <td> {{ $a->sumber->name }}</td>
                                                 <td> {{ $a->proses }}</td>
                                                 <td> {{ $a->ruangan->name }}</td>
                                                 <td> {{ $a->rak->name }}</td>

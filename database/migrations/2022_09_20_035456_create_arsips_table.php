@@ -17,7 +17,7 @@ class CreateArsipsTable extends Migration
             $table->id();
             $table->string('nama_file');
             $table->string('kode_klasifikasi');
-            $table->string('sumber_arsip');
+            $table->foreignId('sumber_id');
             $table->string('proses');
             $table->foreignId('ruangan_id');
             $table->foreignId('rak_id');

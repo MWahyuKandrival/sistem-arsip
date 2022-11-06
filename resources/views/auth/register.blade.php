@@ -28,6 +28,16 @@
                         @enderror
                     </div>
                     <div class="form-floating">
+                        <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip"
+                            name="nip" placeholder="nip" value="{{ old('nip') }}" required>
+                        <label for="nip">nip</label>
+                        @error('nip')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-floating">
                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                             name="email" placeholder="name@example.com" value="{{ old('email') }}" required>
                         <label for="email">Email address</label>

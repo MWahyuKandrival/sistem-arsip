@@ -36,7 +36,8 @@
                                     <label for="kode_klasifikasi">Kode Klasifikasi</label>
                                     <input type="text"
                                         class="form-control @error('kode_klasifikasi') is-invalid  @enderror"
-                                        name="kode_klasifikasi" id="kode_klasifikasi" value="{{ $arsip->kode_klasifikasi }}">
+                                        name="kode_klasifikasi" id="kode_klasifikasi"
+                                        value="{{ $arsip->kode_klasifikasi }}">
                                     @error('kode_klasifikasi')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -45,9 +46,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="sumber_arsip">Sumber Arsip</label>
-                                    <input type="text" class="form-control @error('sumber_arsip') is-invalid  @enderror"
-                                        name="sumber_arsip" id="sumber_arsip" value="{{ $arsip->sumber_arsip }}">
-                                    @error('sumber_arsip')
+                                    <select class="form-control select2" name="sumber_id">
+                                        @forelse ($sumber as $s)
+                                            <option value="{{ $s->id }}"
+                                                @if ($arsip->sumber->id == $s->id) selected @endif>{{ $s->name }}
+                                            </option>
+                                        @empty
+                                            <option value="">Tidak Ada Data Sumber</option>
+                                        @endforelse
+                                    </select>
+                                    @error('sumber_id')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -69,8 +77,9 @@
                                     <select class="form-control @error('proses') is-invalid  @enderror select2"
                                         name="ruangan_id" id="select_ruangan">
                                         @forelse ($ruangan as $ruang)
-                                            <option value="{{ $ruang->id }}" 
-                                                {{ ($arsip->ruangan->id == $ruang->id) ? 'selected' : ''}}>{{ $ruang->name }}</option>
+                                            <option value="{{ $ruang->id }}"
+                                                {{ $arsip->ruangan->id == $ruang->id ? 'selected' : '' }}>
+                                                {{ $ruang->name }}</option>
                                         @empty
                                             <option value="">Tidak Ada Data Ruangan</option>
                                         @endforelse
@@ -86,8 +95,9 @@
                                     <select class="form-control select2" name="rak_id" id="select_rak">
                                         <option>Pilih Rak</option>
                                         @forelse ($rak as $ra)
-                                            <option value="{{ $ra->id }}" 
-                                                {{ ($arsip->rak->id == $ra->id) ? 'selected' : ''}}>{{ $ra->name }}</option>
+                                            <option value="{{ $ra->id }}"
+                                                {{ $arsip->rak->id == $ra->id ? 'selected' : '' }}>{{ $ra->name }}
+                                            </option>
                                         @empty
                                             <option value="">Tidak Ada Data Rak</option>
                                         @endforelse

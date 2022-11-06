@@ -10,7 +10,7 @@ class Arsip extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    protected $with = ['rak', 'ruangan'];
+    protected $with = ['rak', 'ruangan', 'sumber'];
 
     public function scopeFilter($query, array $filters)
     {
@@ -36,5 +36,10 @@ class Arsip extends Model
     public function ruangan()
     {
         return $this->belongsTo(Ruangan::class);
+    }
+
+    public function sumber()
+    {
+        return $this->belongsTo(Sumber::class);
     }
 }

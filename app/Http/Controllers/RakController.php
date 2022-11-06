@@ -26,11 +26,11 @@ class RakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($ruangan_id = "")
+    public function create($param1 = "")
     {
         return view('rak.create', [
             'ruangan' => Ruangan::all(),
-            'ruangan_id' => $ruangan_id,
+            'param1' => $param1,
         ]);
     }
 

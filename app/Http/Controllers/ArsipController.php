@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Arsip;
 use App\Models\Rak;
 use App\Models\Ruangan;
+use App\Models\Sumber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -37,12 +38,13 @@ class ArsipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($ruangan_id ="", $rak_id = "")
+    public function create($param1 ="", $param2 = "")
     {
         return view('arsip.create', [
-            'rak_id' => $rak_id,
-            'ruangan_id' => $ruangan_id,
-            'ruangan' => Ruangan::all()
+            'param1' => $param1,
+            'param2' => $param2,
+            'ruangan' => Ruangan::all(), 
+            'sumber' => Sumber::all(),
         ]);
     }
 
@@ -57,7 +59,7 @@ class ArsipController extends Controller
         $validatedData = $request->validate([
             "nama_file" => "required|max:255",
             "kode_klasifikasi" => "required|max:255",
-            "sumber_arsip" => "required|max:255",
+            "sumber_id" => "required|exists:sumbers,id",
             "proses" => "required",
             "ruangan_id" => "required|exists:ruangans,id",
             "rak_id" => "required|exists:raks,id",
@@ -81,7 +83,7 @@ class ArsipController extends Controller
 
         Arsip::create($validatedData);
         
-        return redirect('/arsip')->with('success', 'Arsip has been created');
+        return redirect('/arsip')->with('success', 'Arsip berhasil ditambahkan');
     }
 
     /**
@@ -111,6 +113,7 @@ class ArsipController extends Controller
             'arsip'=> $arsip,
             'ruangan' => Ruangan::all(),
             'rak' => Rak::where("ruangan_id", $arsip->ruangan->id)->get(),
+            'sumber' => Sumber::all(),
         ]);
     }
 
@@ -126,7 +129,7 @@ class ArsipController extends Controller
         $validatedData = $request->validate([
             "nama_file" => "required|max:255",
             "kode_klasifikasi" => "required|max:255",
-            "sumber_arsip" => "required|max:255",
+            "sumber_id" => "required|exists:sumbers,id",
             "proses" => "required",
             "ruangan_id" => "required|exists:ruangans,id",
             "rak_id" => "required|exists:raks,id",
@@ -152,7 +155,8 @@ class ArsipController extends Controller
         Arsip::where('id', $arsip->id)
         ->update($validatedData);
         
-        return redirect('/rak/'.$arsip->rak->id)->with('success', 'Arsip has been updated');
+        // return redirect('/rak/'.$arsip->rak->id)->with('success', 'Arsip has been updated');
+        return redirect('/arsip')->with('success', 'Arsip berhasil diupdate');
     }
 
     /**

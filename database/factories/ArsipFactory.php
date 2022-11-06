@@ -15,7 +15,7 @@ class ArsipFactory extends Factory
     {
         return [
             'nama_file' => $this->faker->sentence(),
-            'sumber_arsip' => $this->faker->city(),
+            'sumber_id' => mt_rand(1,2),
             'kode_klasifikasi' => $this->faker->postcode(),
             'proses' => mt_rand(1,2) == 1? "Musnah":"Proses",
             'ruangan_id' => mt_rand(1,2),
