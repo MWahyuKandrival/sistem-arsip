@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.login_main')
 
 @section('container')
     <div class="row d-flex justify-content-center">
@@ -22,6 +22,16 @@
                             name="username" placeholder="Username" value="{{ old('username') }}" required>
                         <label for="username">Username</label>
                         @error('username')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip"
+                            name="nip" placeholder="nip" value="{{ old('nip') }}" required>
+                        <label for="nip">nip</label>
+                        @error('nip')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

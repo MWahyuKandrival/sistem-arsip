@@ -1,8 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\RakController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\SumberController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +19,25 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', [ArsipController::class, 'index']);
+Route::get('/', [ArsipController::class, 'index'])->middleware('auth');
+
+Route::get('/arsip/create/{sumber_id}', [ArsipController::class, 'create']);
+
+Route::get('/arsip/create/{ruangan_id}/{rak_id}', [ArsipController::class, 'create']);
+
+Route::resource('/arsip', ArsipController::class);
+
+Route::get('/getRak/{id}', [ArsipController::class, 'getRak']);
+
+Route::resource('/ruangan', RuanganController::class);
+
+Route::get('/rak/create/{id}', [RakController::class, 'create']);
+
+Route::resource('/rak', RakController::class);
+
+Route::resource('/sumber', SumberController::class);
+
+Route::resource('/user', UserController::class);
 
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 
@@ -25,3 +48,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'register']);
 
 Route::post('/register', [AuthController::class, 'store']);
+
+Route::get('/test', function(){
+    return view('test');
+});
