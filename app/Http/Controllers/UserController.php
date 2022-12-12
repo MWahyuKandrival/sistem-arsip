@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
     {
         return view('user.index',[
             'users' => User::all(),
+            "title" => "List User - Arsip",
         ]);
     }
 
@@ -27,7 +29,7 @@ class UserController extends Controller
     public function create()
     {
         return view('user.create', [
-
+            "title" => "Tambah User - Arsip",
         ]);
     }
 
@@ -75,6 +77,7 @@ class UserController extends Controller
     {
         return view('user.edit', [
             'user' => $user,
+            "title" => "Edit User " . $user->name . " - Arsip",
         ]);
     }
 
@@ -90,14 +93,28 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'username' => 'required|string|regex:/\w*/|max:255|unique:users,username,'.$user->id,
             'name' => 'required|string|max:255',
-            'nip' => 'required|min:5|max:255|unique:users',
+            'nip' => 'required|min:5|max:255|unique:users,nip,'.$user->id,
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'required|min:5|max:255',
+            'old_password' => 'required|min:5|max:255',
+            'new_password' => 'confirmed',
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        $data = [
+            "username" => $request->username,
+            "name" => $request->name,
+            "nip" => $request->nip,
+            "email" => $request->email,
+        ];
+
+        if(!Hash::check($request->old_password, $user->password)){
+            return back()->with("error", "Password Salah");
+        }else{
+            if($request->new_password != ""){
+                $data["password"] = bcrypt($request->new_password);
+            }
+        }
         
-        User::where('id', $user->id)->update($validatedData);
+        User::where('id', $user->id)->update($data);
 
         return redirect('/user')->with('success', 'Perubahan Akun berhasil');
     }

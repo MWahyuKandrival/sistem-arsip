@@ -14,8 +14,10 @@ class SumberController extends Controller
      */
     public function index()
     {
+        // dd(Sumber::select("name")->with(['arsip'])->latest()->get());
         return view('sumber.index', [
-            'sumber' => Sumber::with(['arsip'])->latest()->get(),
+            'sumber' => Sumber::select("name", "id")->with(['arsip'])->latest()->get(),
+            'title' => "List Sumber - Arsip",
         ]);
     }
 
@@ -26,7 +28,9 @@ class SumberController extends Controller
      */
     public function create()
     {
-        return view('sumber.create');
+        return view('sumber.create', [
+            'title' => "Tambah Sumber - Arsip",
+        ]);
     }
 
     /**
@@ -55,6 +59,7 @@ class SumberController extends Controller
     {
         return view('sumber.show', [
             'sumber' => $sumber,
+            'title' => "Detail Sumber " . $sumber->name . " - Arsip",
             'arsip' => Arsip::with(['rak', 'ruangan'])->where('sumber_id', $sumber->id)->latest()->get()
         ]);
     }
@@ -68,7 +73,8 @@ class SumberController extends Controller
     public function edit(Sumber $sumber)
     {
         return view('sumber.edit', [
-            "sumber" => $sumber
+            "sumber" => $sumber, 
+            'title' => "Edit Sumber " . $sumber->name . " - Arsip",
         ]);
     }
 

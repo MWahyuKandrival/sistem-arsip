@@ -14,6 +14,7 @@
                     <li><a class="nav-link" href="/ruangan">Ruangan</a></li>
                     <li><a class="nav-link" href="/user">User</a></li>
                     <li><a class="nav-link" href="/sumber">Sumber</a></li>
+                    <li><a class="nav-link" href="/satuan">Satuan</a></li>
                 </ul>
             </li>
             <li class="menu-header">Data</li>

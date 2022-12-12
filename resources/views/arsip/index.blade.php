@@ -21,8 +21,13 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="card-header d-flex">
-                            <h4><a href="/arsip/create" class="btn btn-primary">Tambahkan Arsip</a></h4>
+                        <div class="card-header">
+                            <div class="p-2">
+                                <h4><a href="/arsip/create" class="btn btn-primary">Tambahkan Arsip</a></h4>
+                            </div>
+                            <div class="ml-auto p-2">
+                                <a href="/export/arsip" class="btn btn-outline-success">Export Excel</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -33,7 +38,7 @@
                                             <th>File</th>
                                             <th>Kode Klasifikasi</th>
                                             <th>Sumber Arsip</th>
-                                            <th>Proses</th>
+                                            <th>Perkembangan</th>
                                             <th>Ruangan</th>
                                             <th>Rak</th>
                                             <th>Action</th>
@@ -43,10 +48,10 @@
                                         @forelse ($arsip as $a)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td> {{ $a->nama_file }}</td>
+                                                <td> {{ $a->name }}</td>
                                                 <td> {{ $a->kode_klasifikasi }}</td>
-                                                <td> {{ $a->sumber->name}}</td>
-                                                <td> {{ $a->proses }}</td>
+                                                <td> {{ $a->sumber->name }}</td>
+                                                <td> {{ $a->perkembangan }}</td>
                                                 <td> {{ $a->ruangan->name }}</td>
                                                 <td> {{ $a->rak->name }}</td>
                                                 <td>
@@ -63,7 +68,7 @@
                                                         @csrf
                                                         <button class="badge bg-danger text-white border-0 btn-delete"
                                                             data-loop="{{ $loop->iteration }}"
-                                                            data-name="{{ $a->nama_file }}">
+                                                            data-name="{{ $a->name }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </form>

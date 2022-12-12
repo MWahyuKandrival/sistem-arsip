@@ -16,7 +16,8 @@ class RuanganController extends Controller
     public function index()
     {
         return view('ruangan.index', [
-            'ruangan' => Ruangan::with(['rak', 'arsip'])->latest()->get()
+            'ruangan' => Ruangan::with(['rak', 'arsip'])->latest()->get(), 
+            "title" => "List Ruangan - Arsip",
         ]);
     }
 
@@ -27,7 +28,9 @@ class RuanganController extends Controller
      */
     public function create()
     {
-        return view('ruangan.create');
+        return view('ruangan.create', [
+            "title" => "Tambah Ruangan - Arsip",
+        ]);
     }
 
     /**
@@ -43,7 +46,7 @@ class RuanganController extends Controller
         ]);
 
         Ruangan::create($validatedData);
-        return redirect('/ruangan')->with('success', 'New Ruangan has been added');
+        return redirect('/ruangan')->with('success', 'Ruangan Berhasil Ditambahkan!');
     }
 
     /**
@@ -57,6 +60,7 @@ class RuanganController extends Controller
         return view('ruangan.show', [
             'ruangan' => $ruangan, 
             'rak' => Rak::with(['arsip'])->where('ruangan_id', $ruangan->id)->latest()->get(),
+            "title" => "Detail Ruangan " . $ruangan->name . " - Arsip",
         ]);
     }
 
@@ -69,7 +73,8 @@ class RuanganController extends Controller
     public function edit(Ruangan $ruangan)
     {
         return view('ruangan.edit', [
-            'ruangan' => $ruangan
+            'ruangan' => $ruangan,
+            "title" => "Detail Ruangan " . $ruangan->name . " - Arsip",
         ]);
     }
 
@@ -88,7 +93,7 @@ class RuanganController extends Controller
 
         Ruangan::where('id', $ruangan->id)
                 ->update($validatedData);
-        return redirect('/ruangan')->with('success', 'Ruangan has been Updated');
+        return redirect('/ruangan')->with('success', 'Ruangan Berhasil Diubah!');
     }
 
     /**
@@ -101,6 +106,6 @@ class RuanganController extends Controller
     {
         Ruangan::destroy($ruangan->id);
 
-        return redirect('/ruangan')->with('success', 'Ruangan has been deleted');
+        return redirect('/ruangan')->with('success', 'Ruangan Berhasil Dihapus!');
     }
 }

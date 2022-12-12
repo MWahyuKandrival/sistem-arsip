@@ -15,12 +15,17 @@ class CreateArsipsTable extends Migration
     {
         Schema::create('arsips', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_file');
+            $table->string('no_surat');
+            $table->string('name');
             $table->string('kode_klasifikasi');
             $table->foreignId('sumber_id');
-            $table->string('proses');
             $table->foreignId('ruangan_id');
             $table->foreignId('rak_id');
+            $table->string('perkembangan');
+            $table->string('sampul');
+            $table->string('box');
+            $table->integer('jumlah');
+            $table->foreignId('satuan_id');
             $table->text('keterangan');
             $table->string('file')->nullable();
             $table->timestamps();

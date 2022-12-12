@@ -17,7 +17,8 @@ class RakController extends Controller
     public function index()
     {
         return view('rak.index', [
-            'rak' => Rak::latest()->get()
+            'rak' => Rak::latest()->get(), 
+            "title" => "List Rak - Arsip",
         ]);
     }
 
@@ -29,8 +30,9 @@ class RakController extends Controller
     public function create($param1 = "")
     {
         return view('rak.create', [
-            'ruangan' => Ruangan::all(),
             'param1' => $param1,
+            'ruang' => Ruangan::where('id', $param1)->first(),
+            "title" => "Tambah Rak - Arsip",
         ]);
     }
 
@@ -49,7 +51,7 @@ class RakController extends Controller
 
         Rak::create($validatedData);
 
-        return redirect('/ruangan/'.$request->ruangan_id)->with('success', 'New Ruangan has been added');
+        return redirect('/ruangan/'.$request->ruangan_id)->with('success', 'Rak Berhasil Ditambahkan!');
     }
 
     /**
@@ -62,7 +64,9 @@ class RakController extends Controller
     {
         return view('rak.show', [
             'rak' => $rak,
-            'arsip' => Arsip::with(['rak', 'ruangan'])->where('rak_id', $rak->id)->latest()->get()
+            'ruang' => Ruangan::where('id', $rak->ruangan->id)->first(),
+            'arsip' => Arsip::with(['rak', 'ruangan'])->where('rak_id', $rak->id)->latest()->get(), 
+            "title" => "Detail Rak " . $rak->name . " - Arsip",
         ]);
     }
 
@@ -76,7 +80,9 @@ class RakController extends Controller
     {
         return view('rak.edit', [
             'rak' => $rak,
-            'ruangan' => Ruangan::all()
+            'ruang' => Ruangan::where('id', $rak->ruangan->id)->first(),
+            'ruangan' => Ruangan::all(),
+            "title" => "Edit Rak " . $rak->name . " - Arsip",
         ]);
     }
 

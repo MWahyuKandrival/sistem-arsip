@@ -88,6 +88,7 @@
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="/user" class="btn btn-warning">Back</a>
                             </form>
                         </div>
                     </div>

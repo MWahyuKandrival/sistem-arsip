@@ -53,9 +53,9 @@
                                                         id="deleteForm_{{ $loop->iteration }}">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger text-white border-0 btn-user"
+                                                        <button class="badge bg-danger text-white border-0 btn-delete"
                                                             data-loop="{{ $loop->iteration }}"
-                                                            data-nama="{{ $a->name }}">
+                                                            data-name="{{ $a->name }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </form>

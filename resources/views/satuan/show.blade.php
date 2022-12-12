@@ -3,12 +3,11 @@
 @section('container')
     <section class="section">
         <div class="section-header">
-            <h1>Rak {{ $rak->name }}</h1>
+            <h1>Satuan {{ $satuan->name }}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
-                <div class="breadcrumb-item active"><a href="/ruangan">Ruangan</a></div>
-                <div class="breadcrumb-item active"><a href="/ruangan/{{ $ruang->id }}">{{ $ruang->name }}</a></div>
-                <div class="breadcrumb-item">{{ $rak->name }}</div>
+                <div class="breadcrumb-item active"><a href="/satuan">Satuan</a></div>
+                <div class="breadcrumb-item">{{ $satuan->name }}</div>
             </div>
         </div>
 
@@ -24,7 +23,7 @@
                             </div>
                         @endif
                         <div class="card-header d-flex">
-                            <h4><a href="/arsip/create/{{ $rak->ruangan->id }}/{{ $rak->id }}" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
+                            <h4><a href="/arsip/create/satuan/{{ $satuan->id }}" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -59,13 +58,13 @@
                                                         class="badge bg-warning text-white"><i
                                                             class="fa-solid fa-pen-to-square"></i>
                                                     </a>
-                                                    <form action="/arsip/{{ $a->id }}" method="POST"
+                                                    <form action="/sumber/{{ $a->id }}" method="POST"
                                                         id="deleteForm_{{ $loop->iteration }}">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger text-white border-0 btn-arsip"
+                                                        <button class="badge bg-danger text-white border-0 btn-ruangan"
                                                             data-loop="{{ $loop->iteration }}"
-                                                            data-nama_file="{{ $a->name }}">
+                                                            data-name="{{ $a->name }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </form>

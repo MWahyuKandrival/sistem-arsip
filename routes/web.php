@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SumberController;
+use App\Http\Controllers\SatuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,15 @@ Route::resource('/arsip', ArsipController::class);
 
 Route::get('/getRak/{id}', [ArsipController::class, 'getRak']);
 
+Route::get('/export/arsip', [ArsipController::class, 'export']);
+
 Route::resource('/ruangan', RuanganController::class);
 
 Route::get('/rak/create/{id}', [RakController::class, 'create']);
 
 Route::resource('/rak', RakController::class);
+
+Route::resource('/satuan', SatuanController::class);
 
 Route::resource('/sumber', SumberController::class);
 
@@ -52,3 +57,4 @@ Route::post('/register', [AuthController::class, 'store']);
 Route::get('/test', function(){
     return view('test');
 });
+

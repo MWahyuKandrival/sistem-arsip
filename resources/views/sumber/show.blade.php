@@ -6,6 +6,7 @@
             <h1>Sumber {{ $sumber->name }}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="/sumber">Sumber</a></div>
                 <div class="breadcrumb-item">{{ $sumber->name }}</div>
             </div>
         </div>
@@ -22,7 +23,7 @@
                             </div>
                         @endif
                         <div class="card-header d-flex">
-                            <h4><a href="/arsip/create/{{ $sumber->id }}" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
+                            <h4><a href="/arsip/create/sumber/{{ $sumber->id }}" class="btn btn-primary btn-add-rak">Tambahkan Arsip</a></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -33,7 +34,7 @@
                                             <th>File</th>
                                             <th>Kode Klasifikasi</th>
                                             <th>Sumber Arsip</th>
-                                            <th>Proses</th>
+                                            <th>Perkembangan</th>
                                             <th>Ruangan</th>
                                             <th>Rak</th>
                                             <th>Action</th>
@@ -43,10 +44,10 @@
                                         @forelse ($arsip as $a)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td> {{ $a->nama_file }}</td>
+                                                <td> {{ $a->name }}</td>
                                                 <td> {{ $a->kode_klasifikasi }}</td>
-                                                <td> {{ $a->sumber->name }}</td>
-                                                <td> {{ $a->proses }}</td>
+                                                <td> {{ $a->sumber->name}}</td>
+                                                <td> {{ $a->perkembangan }}</td>
                                                 <td> {{ $a->ruangan->name }}</td>
                                                 <td> {{ $a->rak->name }}</td>
                                                 <td>

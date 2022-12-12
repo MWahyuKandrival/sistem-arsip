@@ -6,7 +6,7 @@
             <h1>rak</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
-                <div class="breadcrumb-item">rak</div>
+                <div class="breadcrumb-item">Rak</div>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
                             </div>
                         @endif
                         <div class="card-header d-flex">
-                            <h4><a href="/rak/create" class="btn btn-primary">Tambahkan rak</a></h4>
+                            <h4><a href="/rak/create" class="btn btn-primary">Tambahkan Rak</a></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

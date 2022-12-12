@@ -3,10 +3,12 @@
 @section('container')
     <section class="section">
         <div class="section-header">
-            <h1>Rak</h1>
+            <h1>Rak/Lemari/Proses/Tahapan</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
-                <div class="breadcrumb-item active"><a href="/rak">Rak</a></div>
+                <div class="breadcrumb-item active"><a href="/ruangan">Ruangan</a></div>
+                <div class="breadcrumb-item active"><a href="/ruangan/{{ $ruang->id }}">{{ $ruang->name }}</a></div>
+                <div class="breadcrumb-item active"><a href="/rak">Rak/Lemari/Proses/Tahapan</a></div>
                 <div class="breadcrumb-item">Edit Rak</div>
             </div>
         </div>
@@ -16,14 +18,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Form Edit Rak</h4>
+                            <h4>Form Edit Rak/Lemari/Proses/Tahapan {{ $rak->name }}</h4>
                         </div>
                         <div class="card-body">
                             <form action="/rak/{{ $rak->id }}" method="POST">
                                 @method('put')
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Nama Rak</label>
+                                    <label for="name">Nama Rak/Lemari/Proses/Tahapan</label>
                                     <input type="text" class="form-control @error('name') is-invalid  @enderror"
                                         name="name" id="name" value="{{ $rak->name }}">
                                     @error('name')
@@ -35,9 +37,9 @@
                                 <div class="form-group">
                                     <label>Ruangan</label>
                                     <select class="form-control select2" name="ruangan_id">
-                                        @forelse ($ruangan as $ruang)
-                                            <option value="{{ $ruang->id }}"
-                                                @if ($rak->ruangan->id == $ruang->id) selected @endif>{{ $ruang->name }}
+                                        @forelse ($ruangan as $ruangs)
+                                            <option value="{{ $ruangs->id }}"
+                                                @if ($ruang->id == $ruangs->id) selected @endif>{{ $ruangs->name }}
                                             </option>
                                         @empty
                                             <option value="">Tidak Ada Data Ruangan</option>
@@ -50,7 +52,7 @@
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/ruangan/{{ $rak->ruangan->id }}" class="btn btn-warning">Back</a>
+                                <a href="/ruangan/{{ $ruang->id }}" class="btn btn-warning">Back</a>
                             </form>
                         </div>
                     </div>
