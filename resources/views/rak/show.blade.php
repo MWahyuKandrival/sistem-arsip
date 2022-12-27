@@ -32,7 +32,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>File</th>
+                                            <th>Nama Surat</th>
                                             <th>Kode Klasifikasi</th>
                                             <th>Sumber Arsip</th>
                                             <th>Perkembangan</th>

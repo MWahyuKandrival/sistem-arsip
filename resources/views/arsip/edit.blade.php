@@ -33,7 +33,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Nama File</label>
+                                    <label for="name">Nama Surat</label>
                                     <input type="text" class="form-control @error('name') is-invalid  @enderror"
                                         name="name" id="name" value="{{ $arsip->name }}">
                                     @error('name')

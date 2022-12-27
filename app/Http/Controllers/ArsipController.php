@@ -53,10 +53,10 @@ class ArsipController extends Controller
             foreach ($data as $d) {
                 if (!$heading) {
                     // display field/column names as a first row
-                    echo "\tNo_surat\tNama Surat\tKode Klasifikasi\tSumber\tRuangan\tRak\tPerkembangan\tSampul\tBox\tSatuan\tKeterangan\n";
+                    echo "\tNo_surat\tNama Surat\tKode Klasifikasi\tSumber\tRuangan\tRak\tPerkembangan\tSampul\tBox\tJumlah\tSatuan\tKeterangan\n";
                     $heading = true;
                 }
-                echo "\t$d->no_surat\t$d->name\t$d->kode_klasifikasi\t" . $d->sumber->name . "\t" . $d->ruangan->name . "\t" . $d->rak->name . "\t$d->perkembangan\t$d->sampul\t$d->box\t" . $d->satuan->name . "\t$d->keterangan\n";
+                echo "\t'$d->no_surat\t'$d->name\t'$d->kode_klasifikasi\t'" . $d->sumber->name . "\t'" . $d->ruangan->name . "\t'" . $d->rak->name . "\t'$d->perkembangan\t'$d->sampul\t'$d->box\t'$d->jumlah\t'" . $d->satuan->name . "\t'$d->keterangan\n";
             }
         exit;
 
